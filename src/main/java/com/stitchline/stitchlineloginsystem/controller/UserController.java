@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -38,23 +38,21 @@ public class UserController {
 
 
     @GetMapping(
-            params = {"userName","password"})
-    public @ResponseBody UserDTO searchUser(
-            @RequestParam(value = "userName") String userName,
-            @RequestParam(value = "password") String password
+            params = {"userName"})
+    public ResponseEntity<StandardResponse> searchUser(
+            @RequestParam(value = "userName") String userName
 
     ) {
+
         UserDTO userDTO = null;
 
-        userDTO = userService.searchUser(userName,password);
+        userDTO = userService.searchUser(userName);
         LOGGER.info("Get By userName");
 
 
-//        return new ResponseEntity<StandardResponse>(
-//                new StandardResponse(200, "success", userDTO),
-//                HttpStatus.OK);
-
-        return userDTO;
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "success", userDTO),
+                HttpStatus.OK);
     }
 
 

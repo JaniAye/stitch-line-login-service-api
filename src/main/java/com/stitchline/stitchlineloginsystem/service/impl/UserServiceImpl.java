@@ -31,9 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO searchUser(String userName, String password) {
+    public UserDTO searchUser(String userName) {
 
-        UserDTO userDTO = mapper.toUserDTO(repo.findByUserNameAndPasswordEquals(userName,password));
+        UserDTO userDTO = mapper.toUserDTO(repo.findByUserName(userName));
 
         if (userDTO!=null) {
 
