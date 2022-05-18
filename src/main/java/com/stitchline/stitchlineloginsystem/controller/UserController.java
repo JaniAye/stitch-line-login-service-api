@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping(
             params = {"userName","password"})
-    public ResponseEntity<StandardResponse> searchUser(
+    public @ResponseBody UserDTO searchUser(
             @RequestParam(value = "userName") String userName,
             @RequestParam(value = "password") String password
 
@@ -50,9 +50,11 @@ public class UserController {
         LOGGER.info("Get By userName");
 
 
-        return new ResponseEntity<StandardResponse>(
-                new StandardResponse(200, "success", userDTO),
-                HttpStatus.OK);
+//        return new ResponseEntity<StandardResponse>(
+//                new StandardResponse(200, "success", userDTO),
+//                HttpStatus.OK);
+
+        return userDTO;
     }
 
 
